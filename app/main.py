@@ -12,8 +12,6 @@ def shop_trip() -> None:
     all_text = []
     for customer in customers:
         money = f"{customer.money:.2f}"
-        if customer.money == round(customer.money):
-            money = customer.money
         to_print = [f"{customer.name} has {money} dollars"]
         all_trips = []
         for shop in shops:
@@ -41,9 +39,7 @@ def shop_trip() -> None:
         )
         to_print.append(f"\n{customer.name} rides home")
         customer.spend_money(cost)
-        money = f"{customer.money: .2f}"
-        if customer.money == round(customer.money):
-            money = customer.money
+        money = f"{customer.money:.2f}"
         to_print.append(f"{customer.name} now has {money} dollars")
         all_text.append("\n".join(to_print))
     print("\n\n".join(all_text))

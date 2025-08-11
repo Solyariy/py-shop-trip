@@ -19,11 +19,9 @@ class Shop:
             f"\nThanks, {name}, for your purchase!\nYou have bought:\n",
         ]
         for key in self.products:
-            price = products[key] * self.products[key]
+            price = products.get(key, 0) * self.products[key]
             if price == 0:
                 continue
-            if price == round(price):
-                price = round(price)
             check_builder.append(
                 f"{products[key]} {key}s for "
                 f"{price:.2f} dollars\n"
