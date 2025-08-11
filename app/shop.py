@@ -15,18 +15,20 @@ class Shop:
             products_expense: float
     ) -> str:
         check_builder = [
-            datetime.datetime.now().strftime("Date: %d/%m/%Y %H:%M:%S"),
+            datetime.datetime.now().strftime("Date: %m/%d/%Y %H:%M:%S"),
             f"\nThanks, {name}, for your purchase!\nYou have bought:\n",
         ]
         for key in self.products:
             price = products[key] * self.products[key]
+            if price == 0:
+                continue
             if price == round(price):
                 price = round(price)
             check_builder.append(
                 f"{products[key]} {key}s for "
-                f"{price} dollars\n"
+                f"{price:.2f} dollars\n"
             )
         check_builder.append(
-            f"Total cost is {products_expense} dollars\nSee you again!"
+            f"Total cost is {products_expense:.2f} dollars\nSee you again!"
         )
         return "".join(check_builder)

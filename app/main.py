@@ -11,12 +11,15 @@ def shop_trip() -> None:
     shops = [Shop(**entry) for entry in data["shops"]]
     all_text = []
     for customer in customers:
-        to_print = [f"{customer.name} has {customer.money} dollars"]
+        money = f"{customer.money:.2f}"
+        if customer.money == round(customer.money):
+            money = customer.money
+        to_print = [f"{customer.name} has {money} dollars"]
         all_trips = []
         for shop in shops:
             trip_cost = customer.calculate_trip_cost(shop, fuel_price)
             to_print.append(
-                f"{customer.name}'s trip to the {shop.name} costs {trip_cost}"
+                f"{customer.name}'s trip to the {shop.name} costs {trip_cost:.2f}"
             )
             all_trips.append((trip_cost, shop))
         cost, shop = min(all_trips, key=lambda item: item[0])
@@ -38,6 +41,9 @@ def shop_trip() -> None:
         )
         to_print.append(f"\n{customer.name} rides home")
         customer.spend_money(cost)
-        to_print.append(f"{customer.name} now has {customer.money} dollars")
+        money = f"{customer.money: .2f}"
+        if customer.money == round(customer.money):
+            money = customer.money
+        to_print.append(f"{customer.name} now has {money} dollars")
         all_text.append("\n".join(to_print))
     print("\n\n".join(all_text))
